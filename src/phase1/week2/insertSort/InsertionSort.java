@@ -25,6 +25,23 @@ public class InsertionSort {
         }
     }
 
+    /**
+     * 由後往前插入排序
+     * @param arr
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> void sort2(E[] arr) {
+        for (int i = arr.length-1; i >=0 ; i--) {
+            //將 arr[i] 插入到合適的位置
+            E t = arr[i];
+            int j;
+            for (j = i; j + 1 < arr.length && t.compareTo(arr[j + 1]) > 0; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[j] = t;
+        }
+    }
+
     public static void main(String[] args) {
 
         int[] dataSize = {10000, 100000};
