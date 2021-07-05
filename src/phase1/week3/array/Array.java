@@ -10,8 +10,7 @@ public class Array {
 
     //array中實際的元素數量
     private int size;
-
-
+    
     /**
      * 無參建構子，預設陣列的容量capacity為10
      */
@@ -45,13 +44,13 @@ public class Array {
     }
 
     //在所有元素前面加入一個元素
-    public void addFirst(int e){
-        add(0,e);
+    public void addFirst(int e) {
+        add(0, e);
     }
 
     //向所有元素後加入一個新元素
     public void addLast(int e) {
-        add(size,e);
+        add(size, e);
     }
 
     //在第index個位置插入一個新元素e
@@ -67,32 +66,82 @@ public class Array {
             data[i + 1] = data[i];
         }
 
-        data[index]=e;
+        data[index] = e;
         size++;
 
     }
+
     //獲取index索引位置的元素
-    int get(int index){
-        if(index < 0 || index >= size)
+    int get(int index) {
+        if (index < 0 || index >= size)
             throw new IllegalArgumentException("Get failed.Index is illegal");
-        return  data[index];
+        return data[index];
     }
 
     //修改index髓飲位置的元素為e
-    void set(int index,int e){
-        if(index < 0 || index >= size)
+    void set(int index, int e) {
+        if (index < 0 || index >= size)
             throw new IllegalArgumentException("Set failed.Index is illegal");
-        data[index]=e;
-    };
+        data[index] = e;
+    }
+
+    //查詢陣列中是否有元素e
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //查詢陣列中元素e所在的索引，如果不存在元素e，則回傳-1
+    public int find(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //從陣列中刪除index位置的元素，回傳刪除的元素
+    public int remove(int index) {
+        if (index < 0 || index >= size)
+            throw new IllegalArgumentException("Remove failed.Index is illegal");
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        return ret;
+    }
+
+    //從陣列中刪除第一個元素，回傳刪除的元素
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    //從陣列中刪除最後一個元素，回傳刪除的元素
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
+    //從陣列中刪除元素e
+    public void removeElement(int e) {
+        int index = find(e);
+        if (index != -1)
+            remove(index);
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Array:size=%d , capacity = %d\n",size,data.length));
+        res.append(String.format("Array:size=%d , capacity = %d\n", size, data.length));
         res.append('[');
-        for(int i = 0 ;i < size ; i++){
+        for (int i = 0; i < size; i++) {
             res.append(data[i]);
-            if(i != size -1){
+            if (i != size - 1) {
                 res.append(", ");
             }
         }
