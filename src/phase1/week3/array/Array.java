@@ -23,9 +23,9 @@ public class Array<E> {
      *
      * @param capacity
      */
-    public Array(int capacity){
+    public Array(int capacity) {
         //data = new E[capacity]; //java 中無法
-        data = (E[])(new Object[capacity]);
+        data = (E[]) (new Object[capacity]);
         size = 0;
     }
 
@@ -57,10 +57,10 @@ public class Array<E> {
     //在第index個位置插入一個新元素e
     public void add(int index, E e) {
 
-        if (size == data.length)
-            throw new IllegalArgumentException("AddLast failed.Array is full.");
         if (index < 0 || index > size)
             throw new IllegalArgumentException("Add failed.Require index >= 0 and index <= size");
+        if (size == data.length)
+            resize(2 * data.length);
 
         //每個元素都向後移一位
         for (int i = size - 1; i >= index; i--) {
@@ -116,6 +116,9 @@ public class Array<E> {
         }
         size--;
         data[size] = null; //loitering objects != memory leak
+
+        if(size == data.length/2)
+            resize(data.length/2);
         return ret;
     }
 
@@ -149,5 +152,14 @@ public class Array<E> {
         }
         res.append(']');
         return res.toString();
+    }
+
+    //自動擴容
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 }
