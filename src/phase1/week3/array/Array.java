@@ -79,6 +79,14 @@ public class Array<E> {
         return data[index];
     }
 
+    public E getLast(){
+        return get(size-1);
+    }
+
+    public E getFirst(){
+        return get(0);
+    }
+
     //修改index髓飲位置的元素為e
     public void set(int index, E e) {
         if (index < 0 || index >= size)
