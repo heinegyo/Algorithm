@@ -1,5 +1,4 @@
 package phase1.week3.stack;
-
 import java.util.Stack;
 
 /*
