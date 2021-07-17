@@ -2,7 +2,7 @@ package phase1.week3.stack;
 
 import phase1.week3.array.Array;
 
-public class ArrayStack<E> implements Stack {
+public class ArrayStack<E> implements Stack<E> {
 
     Array<E> array;
 
@@ -29,17 +29,17 @@ public class ArrayStack<E> implements Stack {
     }
 
     @Override
-    public void push(Object o) {
-        array.addLast((E) o);
+    public void push(E e) {
+        array.addLast(e);
     }
 
     @Override
-    public Object pop() {
+    public E pop() {
         return array.removeLast();
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return array.getLast();
     }
 
