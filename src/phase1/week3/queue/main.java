@@ -1,5 +1,7 @@
 package phase1.week3.queue;
 
+import phase1.week4.linkedlist.LinkedListQueue;
+
 import java.util.Random;
 
 public class main {
@@ -32,5 +34,8 @@ public class main {
         double time2 = testQueue(loopQueue, opCount);
         System.out.println("LoopQueue, time: " + time2 + " s");
 
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
+        double time3 = testQueue(linkedListQueue, opCount);
+        System.out.println("linkedListQueue, time: " + time3 + " s");
     }
 }
