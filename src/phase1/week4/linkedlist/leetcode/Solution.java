@@ -8,7 +8,7 @@ package phase1.week4.linkedlist.leetcode;
 public class Solution {
     public ListNode removeElements(ListNode head, int val) {
         //先處理head節點，
-            //使用循環是避免第二個節點也等於val
+        //使用循環是避免第二個節點也等於val
         while (head != null && head.val == val) {
             head = head.next;
         }
@@ -26,5 +26,14 @@ public class Solution {
             }
         }
         return head;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 6, 3, 4, 5, 6};
+        ListNode head = new ListNode(nums);
+        System.out.println(head);
+
+        ListNode res = (new Solution2()).removeElements(head, 6);
+        System.out.println(res);
     }
 }
