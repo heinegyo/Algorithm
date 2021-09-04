@@ -25,7 +25,8 @@ public class ListNode {
 
         this.val = arr[0];
         ListNode cur = this;
-        for (int i = 0; i < arr.length; i++) {
+        //index 從1開始 0:index為虛擬節點
+        for (int i = 1; i < arr.length; i++) {
             cur.next = new ListNode(arr[i]);
             cur = cur.next;
         }
