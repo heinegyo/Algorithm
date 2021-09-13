@@ -18,4 +18,18 @@ class Solution {
         return pre;
     }
 
+    /**
+     * 反轉鏈表的遞迴實現
+     */
+    public ListNode reverseListWithRecursive(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode rev = reverseListWithRecursive(head.next);
+        head.next.next = head;
+        head.next = null;
+        return rev;
+    }
+
 }
