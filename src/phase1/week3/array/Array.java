@@ -20,7 +20,6 @@ public class Array<E> {
 
     /**
      * 建構子，傳入陣列的容量capacity建構Array
-     *
      * @param capacity
      */
     public Array(int capacity) {
@@ -145,6 +144,15 @@ public class Array<E> {
         int index = find(e);
         if (index != -1)
             remove(index);
+    }
+
+    //從陣列中刪除所有e元素
+    public void removeAllElement(E e){
+        int index = 0;
+        do{
+            index = find(e);
+            if(index != -1)remove(index);
+        }while (index != -1);
     }
 
     @Override
