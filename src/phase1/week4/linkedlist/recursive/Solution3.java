@@ -3,7 +3,7 @@ package phase1.week4.linkedlist.recursive;
 import phase1.week4.linkedlist.leetcode.ListNode;
 
 /**
- *  印出Solution的過程
+ *  印出Solution的過程-使用遞迴解leetcode203
  */
 public class Solution3 {
 
