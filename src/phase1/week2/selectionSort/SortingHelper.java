@@ -1,6 +1,11 @@
 package phase1.week2.selectionSort;
 
 import phase1.week2.insertSort.InsertionSort;
+import phase2.week5.mergeSort.MergeSort;
+import phase2.week5.mergeSort.MergeSortPrint;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class SortingHelper {
     public SortingHelper(){}
@@ -31,6 +36,10 @@ public class SortingHelper {
             SelectionSort.sort(arr);
         else if(sortname.equals("InsertionSort"))
             InsertionSort.sort(arr);
+        else if(sortname.equals("MergeSort"))
+            MergeSort.sort(arr);
+        else if(sortname.equals("MergeSortPrint"))
+            MergeSortPrint.sort(arr);
         long endTime = System.nanoTime();
 
         double time = (endTime - startTime)/1000000000.0;
