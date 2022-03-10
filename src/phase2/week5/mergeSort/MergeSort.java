@@ -21,7 +21,8 @@ public class MergeSort {
         int mid = l + (r - l) / 2;//避免l+r 溢位
         sort(arr, l, mid);
         sort(arr, mid + 1, r);
-        merge(arr, l, mid, r);
+        if(arr[mid].compareTo(arr[mid+1]) > 0)
+            merge(arr, l, mid, r);
     }
 
     //合併兩個有序的區間 arr[l, mid] 和 arr[mid + 1 ,r]
