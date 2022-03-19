@@ -11,24 +11,25 @@ public class MergeSort {
     }
 
     public static <E extends Comparable<E>> void sort(E[] arr) {
-        sort(arr, 0, arr.length - 1);
+        E[] temp = Arrays.copyOf(arr, arr.length);
+        sort(arr, 0, arr.length - 1, temp);
     }
 
-    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
+    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r, E[] temp) {
         if (l >= r) return;//整個區間沒有元素或只有一個元素
 
         //int mid = (l + r) / 2;
         int mid = l + (r - l) / 2;//避免l+r 溢位
-        sort(arr, l, mid);
-        sort(arr, mid + 1, r);
-        if(arr[mid].compareTo(arr[mid+1]) > 0)
-            merge(arr, l, mid, r);
+        sort(arr, l, mid, temp);
+        sort(arr, mid + 1, r, temp);
+        if (arr[mid].compareTo(arr[mid + 1]) > 0)
+            merge(arr, l, mid, r, temp);
     }
 
     //合併兩個有序的區間 arr[l, mid] 和 arr[mid + 1 ,r]
-    private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r) {
-
-        E[] temp = Arrays.copyOfRange(arr, l, r + 1);//copyOfRange是前閉後開，r+1 這個元素是不包含的
+    private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r, E[] temp) {
+        //從arr[]以l為起點copy (r-l)+1個元素到 temp 以l為起點
+        System.arraycopy(arr, l, temp, l, r - l + 1);
 
         int i = l, j = mid + 1;
 
@@ -37,16 +38,16 @@ public class MergeSort {
 
             //arr[i] 和 arr[j]
             if (i > mid) {
-                arr[k] = temp[j - l];
+                arr[k] = temp[j];
                 j++;
             } else if (j > r) {
-                arr[k] = temp[i - l];
+                arr[k] = temp[i];
                 i++;
-            } else if (temp[i - l].compareTo(temp[j - l]) <= 0) {
-                arr[k] = temp[i - l];
+            } else if (temp[i].compareTo(temp[j]) <= 0) {
+                arr[k] = temp[i];
                 i++;
             } else {
-                arr[k] = temp[j - l];
+                arr[k] = temp[j];
                 j++;
             }
         }
@@ -56,11 +57,9 @@ public class MergeSort {
     public static void main(String[] args) {
         int n = 100000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
-        Integer[] arr2 = Arrays.copyOf(arr,arr.length);
-        Integer[] arr3 = Arrays.copyOf(arr,arr.length);
+        Integer[] arr2 = Arrays.copyOf(arr, arr.length);
 
-        SortingHelper.sortTest("SelectionSort", arr2);
-        SortingHelper.sortTest("InsertionSort", arr3);
+        SortingHelper.sortTest("InsertionSort", arr2);
         SortingHelper.sortTest("MergeSort", arr);
     }
 }

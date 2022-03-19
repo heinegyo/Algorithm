@@ -25,6 +25,19 @@ public class InsertionSort {
         }
     }
 
+    //在[l...r]間進行insertion sort
+    public static <E extends Comparable<E>> void sort(E[] arr,int l,int r) {
+        for (int i = l; i <= r; i++) {
+            //將 arr[i] 插入到合適的位置
+            E t = arr[i];
+            int j;
+            for (j = i; j - 1 >= l && t.compareTo(arr[j - 1]) < 0; j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = t;
+        }
+    }
+
     /**
      * 由後往前插入排序
      * @param arr
