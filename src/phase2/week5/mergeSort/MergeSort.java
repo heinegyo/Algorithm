@@ -10,6 +10,7 @@ public class MergeSort {
     private MergeSort() {
     }
 
+    //Top-Down
     public static <E extends Comparable<E>> void sort(E[] arr) {
         E[] temp = Arrays.copyOf(arr, arr.length);
         sort(arr, 0, arr.length - 1, temp);
@@ -24,6 +25,27 @@ public class MergeSort {
         sort(arr, mid + 1, r, temp);
         if (arr[mid].compareTo(arr[mid + 1]) > 0)
             merge(arr, l, mid, r, temp);
+    }
+
+    //Bottom-Up
+    public static <E extends Comparable<E>> void sortBU(E[] arr) {
+
+        E[] temp = Arrays.copyOf(arr, arr.length);
+
+        int n = arr.length;
+
+        //遍歷合併的區間長度
+        for (int sz = 1; sz < n; sz += sz) {
+
+            //遍歷合併的兩個區間的起始位置 i
+            //合併[i, i + sz - 1] 和 [i + sz, Math.min(i + sz + sz - 1, n - 1)]
+            //等同 [i, i + sz ) 和 [i + sz, i + sz + sz)
+            for (int i = 0; i + sz < n; i += sz + sz) {
+                if (arr[i + sz - 1].compareTo(arr[i + sz]) > 0)
+                    merge(arr, i, i + sz - 1, Math.min(i + sz + sz - 1, n - 1), temp);
+            }
+
+        }
     }
 
     //合併兩個有序的區間 arr[l, mid] 和 arr[mid + 1 ,r]
@@ -55,11 +77,11 @@ public class MergeSort {
 
 
     public static void main(String[] args) {
-        int n = 100000;
+        int n = 5000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
 
-        SortingHelper.sortTest("InsertionSort", arr2);
         SortingHelper.sortTest("MergeSort", arr);
+        SortingHelper.sortTest("MergeSortBU", arr2);
     }
 }
