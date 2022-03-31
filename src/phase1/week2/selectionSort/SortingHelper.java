@@ -3,6 +3,7 @@ package phase1.week2.selectionSort;
 import phase1.week2.insertSort.InsertionSort;
 import phase2.week5.mergeSort.MergeSort;
 import phase2.week5.mergeSort.MergeSortPrint;
+import phase2.week6.QuickSort;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -42,6 +43,8 @@ public class SortingHelper {
             MergeSort.sortBU(arr);
         else if(sortname.equals("MergeSortPrint"))
             MergeSortPrint.sort(arr);
+        else if(sortname.equals("QuickSort"))
+            QuickSort.sort(arr);
         long endTime = System.nanoTime();
 
         double time = (endTime - startTime)/1000000000.0;
