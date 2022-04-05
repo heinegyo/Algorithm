@@ -4,6 +4,7 @@ import phase1.week1.linearSearch.ArrayGenerator;
 import phase1.week2.selectionSort.SortingHelper;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class QuickSort {
 
@@ -11,18 +12,24 @@ public class QuickSort {
     }
 
     public static <E extends Comparable<E>> void sort(E[] arr) {
-        sort(arr, 0, arr.length - 1);
+        Random random = new Random();
+        sort(arr, 0, arr.length - 1,random);
     }
 
-    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
+    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r,Random random) {
         if (l >= r) return;
 
-        int p = partition(arr, l, r);
-        sort(arr, l, p - 1);
-        sort(arr, p + 1, r);
+        int p = partition(arr, l, r,random);
+        sort(arr, l, p - 1,random);
+        sort(arr, p + 1, r,random);
     }
 
-    private static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
+    private static <E extends Comparable<E>> int partition(E[] arr, int l, int r,Random random) {
+
+        //產生[l,r]之間的隨機index
+        int p = l + random.nextInt(r - l + 1);
+        swap(arr, l, p);
+
         //arr[L+1...j]< v ; arr[j+1....i] >= v
         int j = l;
         for (int i = l; i <= r; i++)
