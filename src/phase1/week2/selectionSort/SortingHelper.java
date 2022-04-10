@@ -45,6 +45,10 @@ public class SortingHelper {
             MergeSortPrint.sort(arr);
         else if(sortname.equals("QuickSort"))
             QuickSort.sort(arr);
+        else if(sortname.equals("QuickSort2Ways"))
+            QuickSort.sort2Ways(arr);
+        else if(sortname.equals("QuickSort3Ways"))
+            QuickSort.sort3Ways(arr);
         long endTime = System.nanoTime();
 
         double time = (endTime - startTime)/1000000000.0;
