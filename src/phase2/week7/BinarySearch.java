@@ -84,4 +84,62 @@ public class BinarySearch {
         }
         return l;
     }
+
+    // < target的最大值index
+    public static <E extends Comparable<E>> int lower(E[] data, E target) {
+        int l = -1, r = data.length - 1;
+
+        //在data[l,r] 中尋找解
+        while (l < r) {
+            int mid = l + (r - l + 1 ) / 2;
+            if (data[mid].compareTo(target) < 0)
+                l = mid;
+            else
+                r = mid - 1;
+        }
+        return l;
+    }
+
+    // < target ，返回最大值索引
+    // == target，返回最小索引
+    public static <E extends Comparable<E>> int lower_floor(E[] data, E target){
+
+        int l = lower(data, target);
+        // 注意，因為我們要訪問 data[l + 1]，所以，我們要先確保 l + 1 不越界，
+        // 即 l + 1 < data.length
+        if(l + 1 < data.length && data[l + 1].compareTo(target) == 0)
+            return l + 1;
+        return l;
+    }
+
+    // <= target 最大索引
+    public static <E extends Comparable<E>> int upper_floor(E[] data, E target){
+
+        int l = -1, r = data.length - 1;
+
+        // 在 data[l, r] 中尋找解
+        while(l < r){
+
+            int mid = l + (r - l + 1) / 2;
+
+            // 在 lower 中，這里是 data[mid].compareTo(target) < 0
+            // 但是，對於 upper_floor 來說，在 data[mid] == target 的時候，有可能是解
+            // 所以在等於的情況下，不能排除掉 data[mid] 的值，我們的搜索空間的變化，同樣是 l = mid
+            if(data[mid].compareTo(target) <= 0)
+                l = mid;
+            else
+                r = mid - 1;
+        }
+        return l;
+    }
+
+    public static void main(String[] args) {
+        Integer[] arr = {1,1,3,3,5,5};
+        for (int i = 0; i <=6 ; i++)
+            System.out.print(BinarySearch.lower(arr,i)+" ");
+        System.out.println();
+
+    }
+
+    
 }
