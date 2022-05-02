@@ -37,6 +37,7 @@ public class Leetcode875 {
         return l;
     }
 
+    //每個小時吃K根，全部吃完所需要的時間
     private int eatingTime(int[] piles, int k) {
         int res = 0;
         for (int pile : piles)
