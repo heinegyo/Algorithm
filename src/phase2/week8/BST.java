@@ -193,6 +193,54 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    //尋找BST的最小元素
+    public E minimum(){
+        if(size == 0)
+            throw new IllegalArgumentException("BST is empty!");
+        return minimum(root).e;
+    }
+
+    //回傳以node為根的BST的最小值所在的節點
+    private Node minimum(Node node){
+        if(node.left == null)
+            return node;
+        return minimum(node.left);
+    }
+
+    private E minimumNR(){
+        if(size == 0)
+            throw new IllegalArgumentException("BST is empty!");
+        Node cur = root;
+        while (cur.left != null)
+            cur = cur.left;
+        return cur.e;
+    }
+
+    //尋找BST的最小元素
+    public E maximum(){
+        if(size == 0)
+            throw new IllegalArgumentException("BST is empty!");
+        return maximum(root).e;
+    }
+
+    //回傳以node為根的BST的最小值所在的節點
+    private Node maximum(Node node){
+        if(node.right == null)
+            return node;
+        return maximum(node.right);
+    }
+
+    private E maximumNR(){
+        if(size == 0)
+            throw new IllegalArgumentException("BST is empty!");
+        Node cur = root;
+        while (cur.right != null)
+            cur = cur.right;
+        return cur.e;
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -227,7 +275,13 @@ public class BST<E extends Comparable<E>> {
         for (int num : nums)
             bst.add(num);
 
-        bst.levelOrder();
+        // System.out.println(bst.maximum());
+        // System.out.println(bst.maximumNR());
+        //
+        // System.out.println(bst.minimum());
+        // System.out.println(bst.minimumNR());
+
+        // bst.levelOrder();
 
         // bst.preOrder();
         // System.out.println();
