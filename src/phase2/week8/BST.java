@@ -1,8 +1,6 @@
 package phase2.week8;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class BST<E extends Comparable<E>> {
 
@@ -194,21 +192,21 @@ public class BST<E extends Comparable<E>> {
     }
 
     //尋找BST的最小元素
-    public E minimum(){
-        if(size == 0)
+    public E minimum() {
+        if (size == 0)
             throw new IllegalArgumentException("BST is empty!");
         return minimum(root).e;
     }
 
     //回傳以node為根的BST的最小值所在的節點
-    private Node minimum(Node node){
-        if(node.left == null)
+    private Node minimum(Node node) {
+        if (node.left == null)
             return node;
         return minimum(node.left);
     }
 
-    private E minimumNR(){
-        if(size == 0)
+    private E minimumNR() {
+        if (size == 0)
             throw new IllegalArgumentException("BST is empty!");
         Node cur = root;
         while (cur.left != null)
@@ -216,22 +214,22 @@ public class BST<E extends Comparable<E>> {
         return cur.e;
     }
 
-    //尋找BST的最小元素
-    public E maximum(){
-        if(size == 0)
+    //尋找BST的最大元素
+    public E maximum() {
+        if (size == 0)
             throw new IllegalArgumentException("BST is empty!");
         return maximum(root).e;
     }
 
-    //回傳以node為根的BST的最小值所在的節點
-    private Node maximum(Node node){
-        if(node.right == null)
+    //回傳以node為根的BST的最大值所在的節點
+    private Node maximum(Node node) {
+        if (node.right == null)
             return node;
         return maximum(node.right);
     }
 
-    private E maximumNR(){
-        if(size == 0)
+    private E maximumNR() {
+        if (size == 0)
             throw new IllegalArgumentException("BST is empty!");
         Node cur = root;
         while (cur.right != null)
@@ -239,6 +237,49 @@ public class BST<E extends Comparable<E>> {
         return cur.e;
     }
 
+    //從BST中刪除最小值所在節點，回傳最小值
+    public E removeMin() {
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    //刪除掉以Node韋根的BST翁最小節點
+    //回傳刪除解點後新的BST的根
+    private Node removeMin(Node node) {
+
+        if (node.left == null) {
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    //從BST中刪除最大值所在節點
+    public E removeMax() {
+        E ret = maximum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    //刪除掉以node為根的BST中的最大節點
+    //回傳刪除節點後新的BST的根
+    public Node removeMax(Node node) {
+
+        if (node.right == null) {
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
+    }
 
 
     @Override
@@ -271,29 +312,34 @@ public class BST<E extends Comparable<E>> {
 
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
-        int[] nums = {5, 3, 6, 8, 4, 2};
-        for (int num : nums)
-            bst.add(num);
+        Random random = new Random();
+        int n = 1000;
 
-        // System.out.println(bst.maximum());
-        // System.out.println(bst.maximumNR());
-        //
-        // System.out.println(bst.minimum());
-        // System.out.println(bst.minimumNR());
+        //test removeMin
+        for (int i = 0; i < n; i++)
+            bst.add(random.nextInt(10000));
 
-        // bst.levelOrder();
+        ArrayList<Integer> nums = new ArrayList<>();
+        while (!bst.isEmpty())
+            nums.add(bst.removeMin());
 
-        // bst.preOrder();
-        // System.out.println();
-        //
-        // bst.preOrderNR();
-        // System.out.println();
-        //
-        // bst.inOrder();
-        // System.out.println();
-        //
-        // bst.postOrder();
-        // System.out.println();
-        // System.out.println(bst);
+        System.out.println(nums);
+        for (int i = 1; i < nums.size(); i++)
+            if (nums.get(i - 1) > nums.get(i))
+                throw new IllegalArgumentException("Error");
+        System.out.println("removeMin test completed");
+
+        //test removeMax
+        for (int i = 0; i < n; i++)
+            bst.add(random.nextInt(10000));
+
+        nums = new ArrayList<>();
+        while (!bst.isEmpty())
+            nums.add(bst.removeMax());
+        System.out.println(nums);
+        for (int i = 1; i < nums.size(); i++)
+            if(nums.get(i-1) < nums.get(i))
+                throw new IllegalArgumentException("Error");
+        System.out.println("removeMax test completed.");
     }
 }
