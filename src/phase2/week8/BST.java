@@ -281,6 +281,52 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
+    //從BST中刪除元素為e的節點
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+    private Node remove(Node node ,E e){
+        if(node == null)
+            return null;
+
+        if(e.compareTo(node.e) < 0){
+            node.left = remove(node.left, e);
+            return node;
+        }
+        else if(e.compareTo(node.e) > 0 ){
+            node.right = remove(node.right,e);
+            return node;
+        }
+        else { //e.compareTo(node.e) == 0
+
+            //待刪除節點左子樹為空的情況
+            if(node.left == null){
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+            //待刪除節點右子樹為空的情況
+            if(node.right == null){
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+        }
+
+        //待刪除節點左右子樹均不為空的情況
+        //找到比待刪除節點大的最小節點，即待刪除節點右子樹的最小結點
+        //用這個節點頂替刪除節點的位置
+        Node successor = minimum(node.right);
+        successor.right = removeMin(node.right);
+        successor.left = node.left;
+
+        node.left = node.right = null;
+
+        return successor;
+    }
 
     @Override
     public String toString() {
@@ -338,7 +384,7 @@ public class BST<E extends Comparable<E>> {
             nums.add(bst.removeMax());
         System.out.println(nums);
         for (int i = 1; i < nums.size(); i++)
-            if(nums.get(i-1) < nums.get(i))
+            if (nums.get(i - 1) < nums.get(i))
                 throw new IllegalArgumentException("Error");
         System.out.println("removeMax test completed.");
     }
