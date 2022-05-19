@@ -13,7 +13,7 @@ public class FileOperation {
 
     public static boolean readFile(String filename, ArrayList<String> words) {
         if (filename == null || words == null) {
-            System.out.println("filename is nll or words is null");
+            System.out.println("filename is null or words is null");
             return false;
         }
 
