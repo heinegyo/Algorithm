@@ -1,4 +1,4 @@
-package phase2.week8;
+package phase2.week8.Set;
 
 public interface Set <E>{
 

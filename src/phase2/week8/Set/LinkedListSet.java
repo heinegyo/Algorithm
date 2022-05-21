@@ -1,8 +1,8 @@
-package phase2.week8;
+package phase2.week8.Set;
 
 import phase1.week4.linkedlist.LinkedList;
 
-public class LinkedListSet <E> implements Set<E>{
+public class LinkedListSet <E> implements Set<E> {
 
     private LinkedList<E> list;
 

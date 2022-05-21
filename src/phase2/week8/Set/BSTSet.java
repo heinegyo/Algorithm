@@ -1,10 +1,13 @@
-package phase2.week8;
+package phase2.week8.Set;
+
+import phase2.week8.BST;
+import phase2.week8.Set.Set;
 
 /**
  * 基於BST的集合
  * @param <E>
  */
-public class BSTSet <E extends  Comparable<E>> implements Set<E>{
+public class BSTSet <E extends  Comparable<E>> implements Set<E> {
 
     private BST<E> bst;
 
