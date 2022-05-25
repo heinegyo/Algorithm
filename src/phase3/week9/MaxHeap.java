@@ -87,6 +87,14 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
+    //取出堆中的最大元素，並且替換成元素e
+    public E replace(E e) {
+        E ret = findMax();
+        data.set(0, e);
+        siftDown(0);
+        return ret;
+    }
+
     public static void main(String[] args) {
         int n = 1000000;
         MaxHeap<Integer> maxHeap = new MaxHeap<>();

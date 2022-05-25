@@ -4,6 +4,7 @@ import phase1.week2.insertSort.InsertionSort;
 import phase2.week5.mergeSort.MergeSort;
 import phase2.week5.mergeSort.MergeSortPrint;
 import phase2.week6.QuickSort;
+import phase3.week9.HeapSort;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -49,6 +50,8 @@ public class SortingHelper {
             QuickSort.sort2Ways(arr);
         else if(sortname.equals("QuickSort3Ways"))
             QuickSort.sort3Ways(arr);
+        else if(sortname.equals("HeapSort"))
+            HeapSort.sort(arr);
         long endTime = System.nanoTime();
 
         double time = (endTime - startTime)/1000000000.0;
