@@ -18,8 +18,16 @@ public class Array<E> {
         this(10);
     }
 
+    public Array(E[] arr) {
+        data = (E[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            data[i] = arr[i];
+        size = arr.length;
+    }
+
     /**
      * 建構子，傳入陣列的容量capacity建構Array
+     *
      * @param capacity
      */
     public Array(int capacity) {
@@ -78,11 +86,11 @@ public class Array<E> {
         return data[index];
     }
 
-    public E getLast(){
-        return get(size-1);
+    public E getLast() {
+        return get(size - 1);
     }
 
-    public E getFirst(){
+    public E getFirst() {
         return get(0);
     }
 
@@ -124,8 +132,8 @@ public class Array<E> {
         size--;
         data[size] = null; //loitering objects != memory leak
 
-        if(size == data.length/4 && data.length/2 != 0  )
-            resize(data.length/2);
+        if (size == data.length / 4 && data.length / 2 != 0)
+            resize(data.length / 2);
         return ret;
     }
 
@@ -147,17 +155,17 @@ public class Array<E> {
     }
 
     //從陣列中刪除所有e元素
-    public void removeAllElement(E e){
+    public void removeAllElement(E e) {
         int index = 0;
-        do{
+        do {
             index = find(e);
-            if(index != -1)remove(index);
-        }while (index != -1);
+            if (index != -1) remove(index);
+        } while (index != -1);
     }
 
-    public void swap(int i ,int j){
-        if(i<0 || i >= size || j<0 || j>= size)
-            throw  new IllegalArgumentException("Index is illegal.");
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size)
+            throw new IllegalArgumentException("Index is illegal.");
         E t = data[i];
         data[i] = data[j];
         data[j] = t;
