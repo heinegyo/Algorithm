@@ -14,8 +14,10 @@ public class MaxHeap<E extends Comparable<E>> {
 
     public MaxHeap(E[] arr) {
         data = new Array<>(arr);
-        for (int i = parent(arr.length - 1); i >= 0; i--)
-            siftDown(i);
+        if (arr.length != 1) {
+            for (int i = parent(arr.length - 1); i >= 0; i--)
+                siftDown(i);
+        }
     }
 
     public MaxHeap() {
@@ -83,7 +85,7 @@ public class MaxHeap<E extends Comparable<E>> {
             int j = leftChild(k);
             if (j + 1 < data.getSize() &&
                     data.get(j + 1).compareTo(data.get(j)) > 0)
-                j = rightChild(k);
+                j++;
             //data[j]是leftChild和rightChild中的最大值
 
             if (data.get(k).compareTo(data.get(j)) >= 0)
