@@ -4,6 +4,7 @@ import phase1.week2.insertSort.InsertionSort;
 import phase2.week5.mergeSort.MergeSort;
 import phase2.week5.mergeSort.MergeSortPrint;
 import phase2.week6.QuickSort;
+import phase3.week10.BubbleSort;
 import phase3.week9.HeapSort;
 
 import java.lang.reflect.InvocationTargetException;
@@ -54,6 +55,8 @@ public class SortingHelper {
             HeapSort.sort(arr);
         else if(sortname.equals("HeapSort2"))
             HeapSort.sort2(arr);
+        else if(sortname.equals("BubbleSort"))
+            BubbleSort.sort(arr);
         long endTime = System.nanoTime();
 
         double time = (endTime - startTime)/1000000000.0;
